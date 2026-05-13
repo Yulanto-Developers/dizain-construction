@@ -396,7 +396,7 @@ export default function App() {
                   style={{ outline: lightboxIdx === idx ? '2px solid #f97316' : undefined }}
                 >
                   <picture>
-                    <source srcSet={img.src.replace(/\.jpg$/i, '.webp')} type="image/webp" />
+                    <source srcSet={img.src.replace(/\.jpg$/i, '.jpg')} type="image/webp" />
                     <img src={img.src} alt={img.alt || img.title || 'Project photo'} loading="lazy" />
                   </picture>
                   <div className="gallery-overlay">
