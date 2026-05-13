@@ -197,12 +197,12 @@ export default async function handler(req, res) {
 
                     sender: {
                         name: "Dizain Upgraded",
-                        email: "yulantodevelopers@gmail.com",
+                        email: "dizainconstruction@gmail.com",
                     },
 
                     to: [
                         {
-                            email: "yulantodevelopers@gmail.com",
+                            email: "dizainconstruction@gmail.com",
                             name: "Admin",
                         },
                     ],
@@ -232,7 +232,7 @@ export default async function handler(req, res) {
 
                     sender: {
                         name: "Dizain Upgraded",
-                        email: "yulantodevelopers@gmail.com",
+                        email: "dizainconstruction@gmail.com",
                     },
 
                     to: [
