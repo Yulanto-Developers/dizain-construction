@@ -1,0 +1,85 @@
+/* ═══════════════════════════════════════════════
+   DIZAIN CONSTRUCTIONS — DESIGN TOKENS (WHITE THEME)
+   ═══════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* ── Colour palette ─────────────────────── */
+  --bg:          #ffffff;
+  --bg-alt:      #f8fafc;
+  --bg-hero:     linear-gradient(135deg, #fff7ed 0%, #ffffff 55%, #f0f9ff 100%);
+  --panel:       #ffffff;
+  --border:      #e2e8f0;
+  --border-soft: #f1f5f9;
+
+  /* ── Text ───────────────────────────────── */
+  --text-primary:   #0f172a;
+  --text-secondary: #64748b;
+  --text-muted:     #94a3b8;
+
+  /* ── Orange accent ──────────────────────── */
+  --accent:       #f97316;
+  --accent-strong:#ea580c;
+  --accent-soft:  #fed7aa;
+  --accent-tint:  #fff7ed;
+
+  /* ── Shadows ────────────────────────────── */
+  --shadow:    0 1px 3px rgba(15,23,42,0.07), 0 6px 20px rgba(15,23,42,0.06);
+  --shadow-lg: 0 10px 40px rgba(15,23,42,0.10);
+  --shadow-orange: 0 6px 24px rgba(249,115,22,0.28);
+
+  /* ── Typography ─────────────────────────── */
+  --font-body:    'Manrope', system-ui, sans-serif;
+  --font-display: 'Bebas Neue', impact, sans-serif;
+}
+
+/* ── Reset ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* Prevent iOS zoom on input focus */
+  touch-action: manipulation;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Subtle dot grid texture */
+  background-image: radial-gradient(circle, #e2e8f0 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
+  /* Prevent horizontal overflow */
+  overflow-x: hidden;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+}
+
+h1,h2,h3,h4,h5,h6 {
+  line-height: 1.1;
+}
