@@ -55,7 +55,7 @@ export const DEFAULT_CONTENT = {
   gallery: [
     {
       id: 'gallery-10',
-      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(10).jpg',
+      src: '/gallery/project-10.jpg',
       alt: 'Project Photo 1',
       type: 'Project',
       title: 'Completed Project 1',
@@ -64,7 +64,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-11',
-      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(11).jpg',
+      src: '/gallery/project-11.jpg',
       alt: 'Project Photo 2',
       type: 'Project',
       title: 'Completed Project 2',
@@ -73,7 +73,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-12',
-      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(12).jpg',
+      src: '/gallery/project-12.jpg',
       alt: 'Project Photo 3',
       type: 'Project',
       title: 'Completed Project 3',
@@ -82,7 +82,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-3',
-      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(3).jpg',
+      src: '/gallery/project-3.jpg',
       alt: 'Project Photo 4',
       type: 'Project',
       title: 'Completed Project 4',
@@ -91,7 +91,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-8',
-      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(8).jpg',
+      src: '/gallery/project-8.jpg',
       alt: 'Project Photo 5',
       type: 'Project',
       title: 'Completed Project 5',
