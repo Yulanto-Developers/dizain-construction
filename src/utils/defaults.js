@@ -55,7 +55,7 @@ export const DEFAULT_CONTENT = {
   gallery: [
     {
       id: 'gallery-10',
-      src: '/gallery/Copy of Gray Minimalist Construction Company Services Presentation (10).jpg',
+      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(10).jpg',
       alt: 'Project Photo 1',
       type: 'Project',
       title: 'Completed Project 1',
@@ -64,7 +64,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-11',
-      src: '/gallery/Copy of Gray Minimalist Construction Company Services Presentation (11).jpg',
+      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(11).jpg',
       alt: 'Project Photo 2',
       type: 'Project',
       title: 'Completed Project 2',
@@ -73,7 +73,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-12',
-      src: '/gallery/Copy of Gray Minimalist Construction Company Services Presentation (12).jpg',
+      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(12).jpg',
       alt: 'Project Photo 3',
       type: 'Project',
       title: 'Completed Project 3',
@@ -82,7 +82,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-3',
-      src: '/gallery/Copy of Gray Minimalist Construction Company Services Presentation (3).jpg',
+      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(3).jpg',
       alt: 'Project Photo 4',
       type: 'Project',
       title: 'Completed Project 4',
@@ -91,7 +91,7 @@ export const DEFAULT_CONTENT = {
     },
     {
       id: 'gallery-8',
-      src: '/gallery/Copy of Gray Minimalist Construction Company Services Presentation (8).jpg',
+      src: '/gallery/Copy-of-Gray-Minimalist-Construction-Company-Services-Presentation-(8).jpg',
       alt: 'Project Photo 5',
       type: 'Project',
       title: 'Completed Project 5',
@@ -126,14 +126,16 @@ export const DEFAULT_CONTENT = {
       tagline: 'A high-quality, budget-conscious solution that covers all the fundamental requirements for a durable and well-designed home.',
       badge: '',
       specs: [
-        { category: '', items: [
-          'Complete design: 2D plans, 3D elevation, electrical & working drawings',
-          'M20 concrete | 10\' floor height | Standard structural design',
-          'Chettinad/Dalmia cement & ARUN/GBR steel',
-          'Malaysian teak main door (7ft, solid frame)',
-          'Vitrified tiles up to ₹50/sqft',
-          'Daily engineer visit + weekly project manager'
-        ]},
+        {
+          category: '', items: [
+            'Complete design: 2D plans, 3D elevation, electrical & working drawings',
+            'M20 concrete | 10\' floor height | Standard structural design',
+            'Chettinad/Dalmia cement & ARUN/GBR steel',
+            'Malaysian teak main door (7ft, solid frame)',
+            'Vitrified tiles up to ₹50/sqft',
+            'Daily engineer visit + weekly project manager'
+          ]
+        },
       ],
     },
     {
@@ -143,14 +145,16 @@ export const DEFAULT_CONTENT = {
       tagline: 'An upgraded offering featuring superior material brands, enhanced architectural support, and refined interior finishes.',
       badge: 'Most Chosen',
       specs: [
-        { category: '', items: [
-          'Structural + plumbing drawings & soil test included',
-          'ARS FE 550D steel & Dalmia/Ramco cement',
-          '10\' clear ceiling height (more spacious feel)',
-          'Kajaria tiles up to ₹80/sqft + granite staircase',
-          'Ghana teak main door (wider 4ft entry)',
-          'Dedicated architect + stage-wise support'
-        ]},
+        {
+          category: '', items: [
+            'Structural + plumbing drawings & soil test included',
+            'ARS FE 550D steel & Dalmia/Ramco cement',
+            '10\' clear ceiling height (more spacious feel)',
+            'Kajaria tiles up to ₹80/sqft + granite staircase',
+            'Ghana teak main door (wider 4ft entry)',
+            'Dedicated architect + stage-wise support'
+          ]
+        },
       ],
     },
     {
@@ -160,16 +164,18 @@ export const DEFAULT_CONTENT = {
       tagline: 'The ultimate package for homeowners seeking elite engineering, smart-home readiness, and comprehensive interior design.',
       badge: 'Premium',
       specs: [
-        { category: '', items: [
-          'Full 3D interiors, walkthrough & landscape design',
-          'Tata steel + Ultratech cement | M25 concrete',
-          '11\' ceiling height + 5ft basement',
-          '6x6 premium tiles up to ₹160/sqft + marble staircase',
-          'Designer 8ft main door with digital lock',
-          'Dedicated architect support till project completion',
-          'Interior design & home decor assistance',
-          'Smart-ready: EV, lift, automation & unlimited electrical points'
-        ]},
+        {
+          category: '', items: [
+            'Full 3D interiors, walkthrough & landscape design',
+            'Tata steel + Ultratech cement | M25 concrete',
+            '11\' ceiling height + 5ft basement',
+            '6x6 premium tiles up to ₹160/sqft + marble staircase',
+            'Designer 8ft main door with digital lock',
+            'Dedicated architect support till project completion',
+            'Interior design & home decor assistance',
+            'Smart-ready: EV, lift, automation & unlimited electrical points'
+          ]
+        },
       ],
     },
   ],
