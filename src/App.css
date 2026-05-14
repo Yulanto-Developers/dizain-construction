@@ -406,7 +406,7 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .topbar-inner {
@@ -532,7 +532,7 @@
 
     background: white;
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
   .mobile-menu a {
@@ -552,6 +552,7 @@
     width: 100%;
   }
 }
+
 section[id],
 #contact {
   scroll-margin-top: 80px;
@@ -2400,6 +2401,92 @@ button.service-link:hover {
   opacity: 0.7;
 }
 
+/* swiper content */
+
+/* Ensure the container allows absolute positioning for buttons */
+.packages-container {
+  position: relative;
+  width: 100%;
+  padding: 0 10px;
+  /* Prevents cards from touching screen edges */
+}
+
+/* --- ORANGE NAVIGATION BUTTONS --- */
+.pkg-swiper .swiper-button-next,
+.pkg-swiper .swiper-button-prev {
+  position: absolute;
+  top: 300px !important;
+  /* Your specific height */
+  color: #ff8c00 !important;
+  /* Bright Orange */
+  /* background: white; */
+  /* Optional: adds a circle background so they are visible */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+ 
+  z-index: 100;
+}
+
+.pkg-swiper .swiper-button-prev {
+  left: 0px !important;
+}
+
+.pkg-swiper .swiper-button-next {
+  right: 0px !important;
+}
+
+/* Scale down the arrows slightly */
+.pkg-swiper .swiper-button-next:after,
+.pkg-swiper .swiper-button-prev:after {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+/* --- MOBILE COLUMN FIX --- */
+@media (max-width: 1023px) {
+  .pkg-swiper {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .pkg-card {
+    width: 100%;
+    /* Force the card to fill the swiper slide */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-alt{
+    padding: 0px;
+  }
+}
+
+/* --- DESKTOP GRID RESTORATION --- */
+@media (min-width: 1024px) {
+  .pkg-swiper .swiper-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px;
+    transform: none !important;
+  }
+
+  .pkg-swiper .swiper-slide {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Hide navigation and pagination on desktop */
+  .pkg-swiper .swiper-button-next,
+  .pkg-swiper .swiper-button-prev,
+  .pkg-swiper .swiper-pagination {
+    display: none !important;
+  }
+}
+
+/* swiper ends here */
+
 /* ── Responsive ─────────────────────────────── */
 /* Desktop/Laptop: 1100px+ */
 @media (max-width: 1100px) {
@@ -2466,6 +2553,9 @@ button.service-link:hover {
 
 /* Tablet: 721px - 900px */
 @media (max-width: 900px) {
+  .pkg-card{
+    box-shadow: none;
+  }
   .topbar-inner {
     gap: 16px;
   }
@@ -2501,6 +2591,85 @@ button.service-link:hover {
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+
+/* 1. Hide the mobile trigger on desktop */
+.mobile-cta-wrapper {
+  display: none;
+  margin-top: 2rem;
+}
+
+/* 2. Style the Mobile Modal */
+.pyp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.pyp-modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  padding: 30px 20px;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 3. Media Query for Mobile (max-width: 768px or 1024px) */
+@media (max-width: 768px) {
+
+  /* Hide the static card in the hero background */
+  .desktop-only.pyp-card {
+    display: none !important;
+  }
+
+  .pyp-card {
+    display: none !important;
+  }
+
+
+  /* Show the button instead */
+  .mobile-cta-wrapper {
+    display: block;
+  }
+
+  .hero-text {
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -2562,7 +2731,7 @@ button.service-link:hover {
   }
 
   .hero-fullbg {
-    min-height: 100svh;
+    min-height: 80svh;
   }
 
   .hero-fullbg-inner {
@@ -2592,7 +2761,7 @@ button.service-link:hover {
 
   .metrics-strip,
   .metrics-animated-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, (minmax(150, 1fr)));
     gap: 12px;
     max-width: 100%;
     margin: 0 auto;
@@ -2677,7 +2846,7 @@ button.service-link:hover {
   }
 
   .gallery-overlay {
-    opacity: 1;
+    pointer-events: none;
   }
 }
 

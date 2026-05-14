@@ -157,6 +157,7 @@ export const DEFAULT_CONTENT = {
         },
       ],
     },
+    
     {
       name: 'Luxury',
       price: '₹3,199',
@@ -178,6 +179,7 @@ export const DEFAULT_CONTENT = {
         },
       ],
     },
+    
   ],
 
   testimonials: [

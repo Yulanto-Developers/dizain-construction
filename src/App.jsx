@@ -3,6 +3,12 @@ import './App.css'
 import { loadAllContent } from './utils/siteContent.js'
 import { sendConsultationEmail } from './utils/email.js'
 import { DEFAULT_CONTENT } from './utils/defaults.js'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation } from 'swiper/modules'
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 /* ─── Star rating helper ────────────────────── */
 function StarRating({ count }) {
@@ -15,6 +21,7 @@ function StarRating({ count }) {
 export default function App() {
   //header
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // Content and state management
   const [c, setC] = useState(DEFAULT_CONTENT)
   const [activePkg, setActivePkg] = useState(1)
@@ -277,7 +284,6 @@ export default function App() {
         style={{ backgroundImage: `url(${c.hero?.heroImageUrl || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop&q=85'})` }}
       >
         <div className="hero-fullbg-inner">
-
           {/* LEFT: branding + headline */}
           <div className="hero-text">
             {c.hero?.badge && (
@@ -294,7 +300,27 @@ export default function App() {
             )}
             {c.hero?.summary && <p className="hero-fullbg-p">{c.hero?.summary}</p>}
 
-            {/* Offer Banner - Hero Section with Multiple Styles */}
+            {/* MOBILE ONLY CALL TO ACTION BUTTON */}
+            <div className="mobile-cta-wrapper">
+              {/* Changed setIsModalOpen to setShowModal */}
+              <button className="button button-primary mobile-pyp-trigger" onClick={() => setShowModal(true)}>
+                Plan Your Project →
+              </button>
+            </div>
+
+
+            {showModal && (
+              <div className="modal-overlay" onClick={() => setShowModal(false)}>
+                <div className="modal-content" onClick={e => e.stopPropagation()}>
+                  <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+                  {/* Your Lead Form Here */}
+                  <h3>Get Your Free Quote</h3>
+                  {/* ... form fields ... */}
+                </div>
+              </div>
+            )}
+
+            {/* Offer Banner (Only one instance) */}
             {bannerConfig.enabled && (bannerConfig.placement === 'hero' || bannerConfig.placement === 'both') && (
               <div className={`hero-offer-box hero-offer-${bannerConfig.style}`}>
                 <div className="hero-offer-icon">
@@ -311,7 +337,7 @@ export default function App() {
             )}
           </div>
 
-          {/* RIGHT: Plan Your Project card */}
+          {/* RIGHT: Plan Your Project card (Placed correctly inside the inner div) */}
           <div className="pyp-card" id="contact">
             {heroSent ? (
               <div className="pyp-success">
@@ -337,45 +363,16 @@ export default function App() {
                     const budget = e.target[2].value;
                     const email = e.target[3].value.trim();
                     const location = e.target[4].value.trim();
-                    // Validation
+
                     if (!name || !phone || !budget || !email || !location) {
                       setFormError("All fields are required.");
                       setFormLoading(false);
                       return;
                     }
-                    if (!/^\d{10}$/.test(phone)) {
-                      setFormError("Enter a valid 10-digit mobile number.");
-                      setFormLoading(false);
-                      return;
-                    }
-                    if (!/^([\w-.]+)@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
-                      setFormError("Enter a valid email address.");
-                      setFormLoading(false);
-                      return;
-                    }
-                    const formData = { name, phone, budget, email, location, timestamp: new Date().toISOString() };
-                    // Save to localStorage for admin reference
-                    // const submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
-                    // submissions.push(formData);
-                    // localStorage.setItem('formSubmissions', JSON.stringify(submissions));
+
                     try {
-                      const result = await sendConsultationEmail(formData);
-                      if (!result.success) {
-                        setFormError("Failed to send. Please try again.");
-                        setFormLoading(false);
-                        return;
-                      }
-                      setHeroSent(true);
-                      // Google Ads Conversion Tracking
-                      if (window.gtag) {
-                        window.gtag('event', 'conversion', {
-                          send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'
-                        });
-                      }
-                      // Meta Pixel Conversion Tracking
-                      if (window.fbq) {
-                        window.fbq('track', 'Lead');
-                      }
+                      const result = await sendConsultationEmail({ name, phone, budget, email, location });
+                      if (result.success) setHeroSent(true);
                     } catch (err) {
                       setFormError("Network error. Please try again.");
                     } finally {
@@ -383,7 +380,7 @@ export default function App() {
                     }
                   }}
                 >
-                  <input type="text" placeholder="Your Full Name" required autoComplete="name" />
+                  <input type="text" placeholder="Your Full Name" required />
                   <div className="pyp-phone-row">
                     <span className="pyp-cc">🇮🇳 +91</span>
                     <input type="tel" placeholder="Phone Number" required maxLength={10} />
@@ -394,17 +391,14 @@ export default function App() {
                     <option>70 lakhs – 95 lakhs</option>
                     <option>Above 1 crore</option>
                   </select>
-                  <input type="email" placeholder="Your Email Address" required autoComplete="email" />
+                  <input type="email" placeholder="Your Email Address" required />
                   <input type="text" placeholder="Plot / Site Location" />
                   <button type="submit" className="button button-primary button-full pyp-submit" disabled={formLoading}>
-                    {formLoading ? (
-                      <span className="spinner" aria-label="Loading" style={{ marginRight: 8 }}></span>
-                    ) : null}
                     {formLoading ? "Sending..." : "Start Your Construction →"}
                   </button>
-                  {formError && <p className="form-error" role="alert" style={{ color: '#d32f2f', marginTop: 8 }}>{formError}</p>}
+                  {formError && <p className="form-error" style={{ color: '#d32f2f', marginTop: 8 }}>{formError}</p>}
                 </form>
-                <p className="pyp-disclaimer">🔒 By submitting, you agree to our Privacy Policy. No spam, ever.</p>
+                <p className="pyp-disclaimer">🔒 No spam, ever.</p>
               </>
             )}
           </div>
@@ -461,13 +455,20 @@ export default function App() {
                   tabIndex={0}
                   role="button"
                   aria-label={`View image: ${img.title || img.alt || 'Project photo'}`}
-                  onClick={() => setLightboxIdx(idx)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+
+                    // Disable popup on mobile
+                    if (window.innerWidth <= 768) return
+
+                    setLightboxIdx(idx)
+                  }}
                   onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') setLightboxIdx(idx) }}
                   style={{ outline: lightboxIdx === idx ? '2px solid #f97316' : undefined }}
                 >
                   <picture>
                     <source srcSet={img.src.replace(/\.jpg$/i, '.jpg')} type="image/webp" />
-                    <img src={img.src} alt={img.alt || img.title || 'Project photo'} loading="lazy" />
+                    <img src={img.src} alt={img.alt || img.title || 'Project photo'} loading="lazy" style={{ pointerEvents: 'none' }} />
                   </picture>
                   <div className="gallery-overlay">
                     <span className="gallery-type">{img.type}</span>
@@ -587,35 +588,59 @@ export default function App() {
                 <p>{c.sectionHeadings.packages.description}</p>
               )}
             </div>
-            <div className="pkg-card-grid">
-              {(c.packages || []).map((pkg, i) => (
-                <div className={`pkg-card${pkg.badge ? ' pkg-card-badge' : ''}`} key={pkg.name}>
-                  {pkg.badge && <div className="pkg-badge-top">{pkg.badge}</div>}
-                  <div className="pkg-card-header">
-                    <h3 className="pkg-card-title">{pkg.name}</h3>
-                    <div className="pkg-card-price-row">
-                      <span className="pkg-card-price">{pkg.price}</span>
-                      <span className="pkg-card-unit">{pkg.unit}</span>
-                    </div>
-                    <div className="pkg-card-tagline">{pkg.tagline}</div>
-                  </div>
-                  <div className="pkg-card-specs">
-                    {pkg.specs && pkg.specs.length > 0 && pkg.specs.map((spec, specIdx) => (
-                      <div key={specIdx} className="pkg-spec-category">
-                        {spec.category && <h4 className="pkg-category-name">{spec.category}</h4>}
-                        <ul className="pkg-card-list">
-                          {spec.items && spec.items.map((item, idx) => (
-                            <li key={idx}><span className="spec-check">✓</span>{item}</li>
-                          ))}
-                        </ul>
+            <div className="packages-container">
+              <Swiper
+                modules={[Pagination, Navigation]} // Add Navigation module here
+                spaceBetween={20}
+                slidesPerView={1}
+                centeredSlides={true}
+                loop={true} // Enable infinite loop
+                navigation={true} // Enable navigation buttons
+                pagination={{ clickable: true, dynamicBullets: true }}
+                breakpoints={{
+                  1024: {
+                    enabled: false,
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    centeredSlides: false,
+                  }
+                }}
+                className="pkg-swiper"
+              >
+                {(c.packages || []).map((pkg, i) => (
+                  <SwiperSlide key={pkg.name || i}>
+                    <div className={`pkg-card ${pkg.badge ? 'pkg-card-badge' : ''}`}>
+                      {pkg.badge && <div className="pkg-badge-top">{pkg.badge}</div>}
+
+                      <div className="pkg-card-header">
+                        <h3 className="pkg-card-title">{pkg.name}</h3>
+                        <div className="pkg-card-price-row">
+                          <span className="pkg-card-price">{pkg.price}</span>
+                          <span className="pkg-card-unit">{pkg.unit}</span>
+                        </div>
+                        <div className="pkg-card-tagline">{pkg.tagline}</div>
                       </div>
-                    ))}
-                  </div>
-                  <button className="button button-primary button-full" onClick={() => setShowModal(true)}>
-                    Get Quote
-                  </button>
-                </div>
-              ))}
+
+                      <div className="pkg-card-specs">
+                        {pkg.specs?.map((spec, specIdx) => (
+                          <div key={specIdx} className="pkg-spec-category">
+                            {spec.category && <h4 className="pkg-category-name">{spec.category}</h4>}
+                            <ul className="pkg-card-list">
+                              {spec.items?.map((item, idx) => (
+                                <li key={idx}><span className="spec-check">✓</span>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button className="button button-primary button-full" onClick={() => setShowModal(true)}>
+                        Get Quote
+                      </button>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </section>
 
@@ -775,165 +800,169 @@ export default function App() {
       </button>
 
       {/* ─── WhatsApp Floating Button ───────── */}
-      {!showModal && c.contact?.whatsapp && (c.contact?.whatsappEnabled ?? true) && (
-        <a
-          href={`https://wa.me/${c.contact.whatsapp}?text=Hi%2C+I+want+to+discuss+a+construction+project+with+Dizain+Constructions.`}
-          className="wa-float-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
-          style={{
-            position: 'fixed',
-            right: 20,
-            bottom: 24,
-            zIndex: 1200,
-            background: '#25D366',
-            color: '#fff',
-            borderRadius: '50%',
-            width: 56,
-            height: 56,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-            fontSize: 32,
-            cursor: 'pointer',
-            transition: 'box-shadow 0.2s',
-            border: 'none',
-            outline: 'none',
-            textDecoration: 'none',
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="currentColor"
-            viewBox="0 0 16 16"
+      {
+        !showModal && c.contact?.whatsapp && (c.contact?.whatsappEnabled ?? true) && (
+          <a
+            href={`https://wa.me/${c.contact.whatsapp}?text=Hi%2C+I+want+to+discuss+a+construction+project+with+Dizain+Constructions.`}
+            className="wa-float-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+            style={{
+              position: 'fixed',
+              right: 20,
+              bottom: 24,
+              zIndex: 1200,
+              background: '#25D366',
+              color: '#fff',
+              borderRadius: '50%',
+              width: 56,
+              height: 56,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
+              fontSize: 32,
+              cursor: 'pointer',
+              transition: 'box-shadow 0.2s',
+              border: 'none',
+              outline: 'none',
+              textDecoration: 'none',
+            }}
           >
-            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.06 3.973l-1.127 4.113 4.209-1.103a7.859 7.859 0 0 0 3.839 1.006h.001c4.368 0 7.926-3.558 7.93-7.93a7.856 7.856 0 0 0-2.332-5.547zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
-          </svg>
-          <span style={{
-            position: 'absolute',
-            left: '-9999px',
-            width: 1,
-            height: 1,
-            overflow: 'hidden'
-          }}>Chat on WhatsApp</span>
-        </a>
-      )}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.06 3.973l-1.127 4.113 4.209-1.103a7.859 7.859 0 0 0 3.839 1.006h.001c4.368 0 7.926-3.558 7.93-7.93a7.856 7.856 0 0 0-2.332-5.547zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
+            </svg>
+            <span style={{
+              position: 'absolute',
+              left: '-9999px',
+              width: 1,
+              height: 1,
+              overflow: 'hidden'
+            }}>Chat on WhatsApp</span>
+          </a>
+        )
+      }
 
       {/* ─── Modal ──────────────────────────── */}
-      {showModal && (
-        <div className="modal-overlay" role="dialog" aria-modal="true" onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false) }}>
-          <div className="modal-box">
-            <button className="modal-close" onClick={() => setShowModal(false)} aria-label="Close">✕</button>
-            <div className="form-header">
-              <p className="form-kicker">🗓️ Free Consultation</p>
-              <h2>Plan Your Build Today</h2>
-              <p className="form-copy">A project expert will contact you within 20 min with a free cost estimate.</p>
-            </div>
-            <form
-              className="lead-form"
-              onSubmit={async e => {
-                e.preventDefault();
-                setModalFormLoading(true);
-                setModalFormError("");
-                const name = e.target.mfname.value.trim();
-                const phone = e.target.mfphone.value.trim();
-                const location = e.target.mfloc.value.trim();
-                const budget = e.target.mfbudget.value;
-                const email = e.target.mfemail.value.trim();
-                const details = e.target.mfdetails.value.trim();
-                // Validation
-                if (!name || !phone || !location || !budget || !email) {
-                  setModalFormError("All fields are required.");
-                  setModalFormLoading(false);
-                  return;
-                }
-                if (!/^\d{10}$/.test(phone)) {
-                  setModalFormError("Enter a valid 10-digit mobile number.");
-                  setModalFormLoading(false);
-                  return;
-                }
-                if (!/^([\w-.]+)@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
-                  setModalFormError("Enter a valid email address.");
-                  setModalFormLoading(false);
-                  return;
-                }
-                const formData = { name, phone, location, budget, email, details, timestamp: new Date().toISOString() };
-                // Save to localStorage for admin reference
-                // const submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
-                // submissions.push(formData);
-                // localStorage.setItem('formSubmissions', JSON.stringify(submissions));
-                try {
-                  const result = await sendConsultationEmail(formData);
-                  if (!result.success) {
-                    setModalFormError("Failed to send. Please try again.");
+      {
+        showModal && (
+          <div className="modal-overlay" role="dialog" aria-modal="true" onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false) }}>
+            <div className="modal-box">
+              <button className="modal-close" onClick={() => setShowModal(false)} aria-label="Close">✕</button>
+              <div className="form-header">
+                <p className="form-kicker">🗓️ Free Consultation</p>
+                <h2>Plan Your Build Today</h2>
+                <p className="form-copy">A project expert will contact you within 20 min with a free cost estimate.</p>
+              </div>
+              <form
+                className="lead-form"
+                onSubmit={async e => {
+                  e.preventDefault();
+                  setModalFormLoading(true);
+                  setModalFormError("");
+                  const name = e.target.mfname.value.trim();
+                  const phone = e.target.mfphone.value.trim();
+                  const location = e.target.mfloc.value.trim();
+                  const budget = e.target.mfbudget.value;
+                  const email = e.target.mfemail.value.trim();
+                  const details = e.target.mfdetails.value.trim();
+                  // Validation
+                  if (!name || !phone || !location || !budget || !email) {
+                    setModalFormError("All fields are required.");
                     setModalFormLoading(false);
                     return;
                   }
-                  setShowModal(false);
-                  // Google Ads Conversion Tracking
-                  if (window.gtag) {
-                    window.gtag('event', 'conversion', {
-                      send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'
-                    });
+                  if (!/^\d{10}$/.test(phone)) {
+                    setModalFormError("Enter a valid 10-digit mobile number.");
+                    setModalFormLoading(false);
+                    return;
                   }
-                  // Meta Pixel Conversion Tracking
-                  if (window.fbq) {
-                    window.fbq('track', 'Lead');
+                  if (!/^([\w-.]+)@([\w-]+\.)+[\w-]{2,}$/.test(email)) {
+                    setModalFormError("Enter a valid email address.");
+                    setModalFormLoading(false);
+                    return;
                   }
-                } catch (err) {
-                  setModalFormError("Network error. Please try again.");
-                } finally {
-                  setModalFormLoading(false);
-                }
-              }}
-            >
-              <div className="form-row-2">
-                <div className="form-group">
-                  <label htmlFor="mfname">Full Name *</label>
-                  <input id="mfname" type="text" placeholder="e.g. Suresh Kumar" required />
+                  const formData = { name, phone, location, budget, email, details, timestamp: new Date().toISOString() };
+                  // Save to localStorage for admin reference
+                  // const submissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
+                  // submissions.push(formData);
+                  // localStorage.setItem('formSubmissions', JSON.stringify(submissions));
+                  try {
+                    const result = await sendConsultationEmail(formData);
+                    if (!result.success) {
+                      setModalFormError("Failed to send. Please try again.");
+                      setModalFormLoading(false);
+                      return;
+                    }
+                    setShowModal(false);
+                    // Google Ads Conversion Tracking
+                    if (window.gtag) {
+                      window.gtag('event', 'conversion', {
+                        send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'
+                      });
+                    }
+                    // Meta Pixel Conversion Tracking
+                    if (window.fbq) {
+                      window.fbq('track', 'Lead');
+                    }
+                  } catch (err) {
+                    setModalFormError("Network error. Please try again.");
+                  } finally {
+                    setModalFormLoading(false);
+                  }
+                }}
+              >
+                <div className="form-row-2">
+                  <div className="form-group">
+                    <label htmlFor="mfname">Full Name *</label>
+                    <input id="mfname" type="text" placeholder="e.g. Suresh Kumar" required />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="mfphone">Phone Number *</label>
+                    <input id="mfphone" type="tel" placeholder="+91 89393 30941" required />
+                  </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="mfphone">Phone Number *</label>
-                  <input id="mfphone" type="tel" placeholder="+91 89393 30941" required />
+                  <label htmlFor="mfloc">Plot / Site Location *</label>
+                  <input id="mfloc" type="text" placeholder="e.g. Adyar, Tambaram, ECR…" required />
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="mfloc">Plot / Site Location *</label>
-                <input id="mfloc" type="text" placeholder="e.g. Adyar, Tambaram, ECR…" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="mfbudget">Estimated Budget</label>
-                <select id="mfbudget" defaultValue="">
-                  <option value="" disabled>Budget range</option>
-                  <option>55 lakhs – 70 lakhs</option>
-                  <option>70 lakhs – 95 lakhs</option>
-                  <option>Above 1 crore</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="mfemail">Email Address *</label>
-                <input id="mfemail" type="email" placeholder="e.g. you@email.com" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="mfdetails">Tell us more (optional)</label>
-                <textarea id="mfdetails" placeholder="Plot size, number of floors, budget range…" rows="3" />
-              </div>
-              <button className="button button-primary button-full btn-submit" type="submit" disabled={modalFormLoading}>
-                {modalFormLoading ? (
-                  <span className="spinner" aria-label="Loading" style={{ marginRight: 8 }}></span>
-                ) : null}
-                {modalFormLoading ? "Sending..." : "Request Free Consultation →"}
-              </button>
-              {modalFormError && <p className="form-error" role="alert" style={{ color: '#d32f2f', marginTop: 8 }}>{modalFormError}</p>}
-              <p className="form-disclaimer">🔒 Your details are safe with us. No spam ever.</p>
-            </form>
+                <div className="form-group">
+                  <label htmlFor="mfbudget">Estimated Budget</label>
+                  <select id="mfbudget" defaultValue="">
+                    <option value="" disabled>Budget range</option>
+                    <option>55 lakhs – 70 lakhs</option>
+                    <option>70 lakhs – 95 lakhs</option>
+                    <option>Above 1 crore</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="mfemail">Email Address *</label>
+                  <input id="mfemail" type="email" placeholder="e.g. you@email.com" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="mfdetails">Tell us more (optional)</label>
+                  <textarea id="mfdetails" placeholder="Plot size, number of floors, budget range…" rows="3" />
+                </div>
+                <button className="button button-primary button-full btn-submit" type="submit" disabled={modalFormLoading}>
+                  {modalFormLoading ? (
+                    <span className="spinner" aria-label="Loading" style={{ marginRight: 8 }}></span>
+                  ) : null}
+                  {modalFormLoading ? "Sending..." : "Request Free Consultation →"}
+                </button>
+                {modalFormError && <p className="form-error" role="alert" style={{ color: '#d32f2f', marginTop: 8 }}>{modalFormError}</p>}
+                <p className="form-disclaimer">🔒 Your details are safe with us. No spam ever.</p>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </>
   )
 }
