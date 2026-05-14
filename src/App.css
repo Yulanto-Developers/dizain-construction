@@ -2401,6 +2401,10 @@ button.service-link:hover {
   opacity: 0.7;
 }
 
+.py-5{
+  margin: 0px 0px 75px 0px;
+}
+
 /* swiper content */
 
 /* Ensure the container allows absolute positioning for buttons */
@@ -2424,7 +2428,7 @@ button.service-link:hover {
   width: 40px;
   height: 40px;
   border-radius: 50%;
- 
+
   z-index: 100;
 }
 
@@ -2458,7 +2462,7 @@ button.service-link:hover {
     flex-direction: column;
   }
 
-  .section-alt{
+  .section-alt {
     padding: 0px;
   }
 }
@@ -2553,9 +2557,10 @@ button.service-link:hover {
 
 /* Tablet: 721px - 900px */
 @media (max-width: 900px) {
-  .pkg-card{
+  .pkg-card {
     box-shadow: none;
   }
+
   .topbar-inner {
     gap: 16px;
   }
@@ -2663,9 +2668,7 @@ button.service-link:hover {
 
 
   /* Show the button instead */
-  .mobile-cta-wrapper {
-    display: block;
-  }
+
 
   .hero-text {
     width: 100%;
@@ -2673,7 +2676,34 @@ button.service-link:hover {
   }
 }
 
+@media (max-width: 1023px) {
 
+  /* This wrapper needs to be inside your main content div, but BEFORE the footer */
+  .mobile-cta-wrapper {
+    display: flex;
+    justify-content: center;
+
+    /* The Magic Part */
+    position: sticky;
+    bottom: 20px;
+    /* Distance from bottom while floating */
+    margin-top: -60px;
+    /* Adjust this so it doesn't create huge gaps in your layout */
+
+    z-index: 998;
+    pointer-events: none;
+    /* Allows clicking through the wrapper to content behind it */
+  }
+
+  .mobile-pyp-trigger {
+    pointer-events: auto;
+    /* Re-enables clicking for the button itself */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    /* Makes it look like a nice mobile bar */
+    max-width: 400px;
+  }
+}
 
 /* Mobile: 720px and below */
 @media (max-width: 720px) {

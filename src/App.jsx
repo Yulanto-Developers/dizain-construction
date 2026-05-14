@@ -301,12 +301,12 @@ export default function App() {
             {c.hero?.summary && <p className="hero-fullbg-p">{c.hero?.summary}</p>}
 
             {/* MOBILE ONLY CALL TO ACTION BUTTON */}
-            <div className="mobile-cta-wrapper">
-              {/* Changed setIsModalOpen to setShowModal */}
+            {/* <div className="mobile-cta-wrapper">
+            
               <button className="button button-primary mobile-pyp-trigger" onClick={() => setShowModal(true)}>
                 Plan Your Project →
               </button>
-            </div>
+            </div> */}
 
 
             {showModal && (
@@ -710,7 +710,7 @@ export default function App() {
           </section>
 
           {/* ─── FAQ ────────────────────────── */}
-          <section className="section faq-section">
+          <section className="section faq-section py-5">
             <div className="section-heading centered">
               <p className="eyebrow">{c.sectionHeadings?.faqs?.eyebrow || 'FAQs'}</p>
               <h2>{c.sectionHeadings?.faqs?.heading || 'Questions Homeowners Ask'}</h2>
@@ -731,6 +731,12 @@ export default function App() {
             </div>
           </section>
 
+          <div className="mobile-cta-wrapper py-5">
+            <button className="button button-primary mobile-pyp-trigger" onClick={() => setShowModal(true)}>
+              Plan Your Project →
+            </button>
+          </div>
+
           {/* ─── CTA ────────────────────────── */}
           <section className="cta-section section">
             <div className="cta-glow" aria-hidden="true" />
@@ -743,6 +749,8 @@ export default function App() {
               </button>
             </div>
           </section>
+
+
 
         </main>
 
