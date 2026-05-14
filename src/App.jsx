@@ -4,7 +4,7 @@ import { loadAllContent } from './utils/siteContent.js'
 import { sendConsultationEmail } from './utils/email.js'
 import { DEFAULT_CONTENT } from './utils/defaults.js'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -590,12 +590,20 @@ export default function App() {
             </div>
             <div className="packages-container">
               <Swiper
-                modules={[Pagination, Navigation]} // Add Navigation module here
+                modules={[Pagination, Autoplay]}
                 spaceBetween={20}
                 slidesPerView={1}
                 centeredSlides={true}
-                loop={true} // Enable infinite loop
-                navigation={true} // Enable navigation buttons
+                loop={true}
+
+                // 4. Add Autoplay configuration (3000ms = 3 seconds)
+                autoplay={{
+                  delay: 3000,
+                  disableOnInteraction: false, // Keeps sliding even after user touches it
+                }}
+
+                // 5. Removed navigation={true}
+
                 pagination={{ clickable: true, dynamicBullets: true }}
                 breakpoints={{
                   1024: {
