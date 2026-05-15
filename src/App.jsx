@@ -5,6 +5,7 @@ import { sendConsultationEmail } from './utils/email.js'
 import { DEFAULT_CONTENT } from './utils/defaults.js'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper/modules'
+import toast from "react-hot-toast";
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -913,10 +914,12 @@ export default function App() {
                   try {
                     const result = await sendConsultationEmail(formData);
                     if (!result.success) {
+                      // toast.error("Failed to send. Please try again.");
                       setModalFormError("Failed to send. Please try again.");
                       setModalFormLoading(false);
                       return;
                     }
+                    toast.success("Consultation request submitted successfully!");
                     setShowModal(false);
                     // Google Ads Conversion Tracking
                     if (window.gtag) {
