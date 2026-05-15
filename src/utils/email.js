@@ -7,7 +7,7 @@ export async function sendConsultationEmail(formData) {
   try {
 
     const response = await fetch(
-      "http://localhost:5000/send-email",
+      "/api/send-email",
       {
         method: "POST",
 
