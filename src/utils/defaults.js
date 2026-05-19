@@ -23,7 +23,7 @@ export const DEFAULT_CONTENT = {
       { value: '10 yr', label: 'Warranty' },
     ],
     heroImageUrl:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop&q=85',
+      '/banner/banner-1.jpg',
     heroImageAlt: 'Beautiful completed home by Dizain Constructions',
     heroImageCaption: 'G+2 Luxury Villa — Adyar, Chennai',
     heroImageSub: 'Delivered on schedule · Prestige Package · 3,200 sqft',
@@ -45,7 +45,7 @@ export const DEFAULT_CONTENT = {
 
   services: [
     { icon: '🏠', title: 'Turnkey Home Construction', copy: 'We manage everything — design, approvals, material procurement, civil work, and final handover. One team, zero coordination headaches.', tag: 'Most Popular' },
-    { icon: '🏛️', title: 'Villa & Premium Residences', copy: 'Architect-led planning for statement homes with high-end detailing, premium finishes, and dedicated site supervision from day one.', tag: '' },
+    { icon: '🏛️', title: 'Interior Design', copy: 'Architect-led planning for statement homes with high-end detailing, premium finishes, and dedicated site supervision from day one.', tag: '' },
     { icon: '🏢', title: 'Commercial Construction', copy: 'Office spaces, retail stores, and mixed-use buildings built with operational efficiency, code compliance, and a sharp eye on timelines.', tag: '' },
     { icon: '🔨', title: 'Renovation & Upgrades', copy: 'Floor additions, interior renovation, structural upgrades, and modern remodelling — executed without disrupting your daily life.', tag: '' },
     { icon: '📐', title: 'Architectural Design', copy: 'In-house architects create functional floor plans, 3D visualisations, and working drawings that reflect your lifestyle and budget.', tag: '' },
@@ -120,11 +120,11 @@ export const DEFAULT_CONTENT = {
 
   packages: [
     {
-      name: 'Essential',
+      name: 'Classic',
       price: '₹2,450',
       unit: '/sqft',
       tagline: 'A high-quality, budget-conscious solution that covers all the fundamental requirements for a durable and well-designed home.',
-      badge: '',
+      badge: 'Best Value',
       specs: [
         {
           category: '', items: [
@@ -139,8 +139,8 @@ export const DEFAULT_CONTENT = {
       ],
     },
     {
-      name: 'Signature',
-      price: '₹2,700',
+      name: 'Permium',
+      price: '₹2,699',
       unit: '/sqft',
       tagline: 'An upgraded offering featuring superior material brands, enhanced architectural support, and refined interior finishes.',
       badge: 'Most Chosen',
@@ -152,18 +152,19 @@ export const DEFAULT_CONTENT = {
             '10\' clear ceiling height (more spacious feel)',
             'Kajaria tiles up to ₹80/sqft + granite staircase',
             'Ghana teak main door (wider 4ft entry)',
+            'Kajaria tiles up to ₹80/sqft + granite staircase',
             'Dedicated architect + stage-wise support'
           ]
         },
       ],
     },
-    
+
     {
       name: 'Luxury',
       price: '₹3,199',
       unit: '/sqft',
       tagline: 'The ultimate package for homeowners seeking elite engineering, smart-home readiness, and comprehensive interior design.',
-      badge: 'Premium',
+      badge: 'Top Tier',
       specs: [
         {
           category: '', items: [
@@ -172,14 +173,13 @@ export const DEFAULT_CONTENT = {
             '11\' ceiling height + 5ft basement',
             '6x6 premium tiles up to ₹160/sqft + marble staircase',
             'Designer 8ft main door with digital lock',
-            'Dedicated architect support till project completion',
-            'Interior design & home decor assistance',
+            'Dedicated architect support till project completion Interior design & home decor assistance',
             'Smart-ready: EV, lift, automation & unlimited electrical points'
           ]
         },
       ],
     },
-    
+
   ],
 
   testimonials: [

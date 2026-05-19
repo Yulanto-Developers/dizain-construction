@@ -67,10 +67,10 @@ export default function App() {
     try {
       const config = JSON.parse(localStorage.getItem('trackingConfig') || '{}');
       setBannerConfig({
-        enabled: !!config.offerBannerEnabled,
-        text: config.offerBannerText || '🎉 FREE ₹2 Lakh Premium Upgrades on Your Dream Home!',
-        placement: config.offerBannerPlacement || 'hero',
-        style: config.offerBannerStyle || 'gift-orange'
+        enabled: !false,
+        text: '🎉 FREE ₹2 Lakh Premium Upgrades on Your Dream Home!' || config.offerBannerText,
+        placement: 'hero' || config.offerBannerPlacement,
+        style: 'gift-orange' || config.offerBannerStyle
       });
     } catch { }
   }, []);
@@ -282,7 +282,7 @@ export default function App() {
       <section
         className="hero-fullbg"
         id="home"
-        style={{ backgroundImage: `url(${c.hero?.heroImageUrl || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=900&fit=crop&q=85'})` }}
+        style={{ backgroundImage: `url(${'/banner/banner-1.jpg' || c.hero?.heroImageUrl})` }}
       >
         <div className="hero-fullbg-inner">
           {/* LEFT: branding + headline */}
@@ -584,7 +584,7 @@ export default function App() {
           <section className="section section-alt" id="packages">
             <div className="section-heading centered">
               <p className="eyebrow">{c.sectionHeadings?.packages?.eyebrow || 'Construction Packages'}</p>
-              <h2>{c.sectionHeadings?.packages?.heading || 'Transparent Pricing for Every Budget'}</h2>
+              {/* <h2>{c.sectionHeadings?.packages?.heading || 'Transparent Pricing for Every Budget'}</h2> */}
               {c.sectionHeadings?.packages?.description && (
                 <p>{c.sectionHeadings.packages.description}</p>
               )}
@@ -817,7 +817,7 @@ export default function App() {
       </button>
 
       {/* ─── WhatsApp Floating Button ───────── */}
-      {
+      {/* {
         !showModal && c.contact?.whatsapp && (c.contact?.whatsappEnabled ?? true) && (
           <a
             href={`https://wa.me/${c.contact.whatsapp}?text=Hi%2C+I+want+to+discuss+a+construction+project+with+Dizain+Constructions.`}
@@ -865,7 +865,7 @@ export default function App() {
             }}>Chat on WhatsApp</span>
           </a>
         )
-      }
+      } */}
 
       {/* ─── Modal ──────────────────────────── */}
       {
