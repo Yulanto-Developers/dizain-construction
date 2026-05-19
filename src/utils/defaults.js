@@ -32,7 +32,7 @@ export const DEFAULT_CONTENT = {
   metrics: [
     { value: '120+', label: 'Homes Built', sub: 'Across Chennai & suburbs' },
     { value: '12+', label: 'Years of Experience', sub: 'Residential & commercial' },
-    { value: '98%', label: 'On-Time Delivery', sub: 'Milestone-tracked projects' },
+    { value: '100%', label: 'On-Time Delivery', sub: 'Milestone-tracked projects' },
     { value: '10 Yr', label: 'Structural Warranty', sub: 'Full post-handover support' },
   ],
 
@@ -150,7 +150,6 @@ export const DEFAULT_CONTENT = {
             'Structural + plumbing drawings & soil test included',
             'ARS FE 550D steel & Dalmia/Ramco cement',
             '10\' clear ceiling height (more spacious feel)',
-            'Kajaria tiles up to ₹80/sqft + granite staircase',
             'Ghana teak main door (wider 4ft entry)',
             'Kajaria tiles up to ₹80/sqft + granite staircase',
             'Dedicated architect + stage-wise support'
@@ -231,7 +230,7 @@ export const DEFAULT_CONTENT = {
     packages: {
       eyebrow: 'Construction Packages',
       heading: 'Transparent Pricing for Every Budget',
-      description: 'Choose the right package for your needs. All details are editable in the admin panel.'
+      description: 'Choose the right package for your needs.'
     },
     testimonials: {
       eyebrow: 'Client Reviews',

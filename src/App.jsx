@@ -584,7 +584,7 @@ export default function App() {
           <section className="section section-alt" id="packages">
             <div className="section-heading centered">
               <p className="eyebrow">{c.sectionHeadings?.packages?.eyebrow || 'Construction Packages'}</p>
-              {/* <h2>{c.sectionHeadings?.packages?.heading || 'Transparent Pricing for Every Budget'}</h2> */}
+              <h2>{c.sectionHeadings?.packages?.heading || 'Transparent Pricing for Every Budget'}</h2>
               {c.sectionHeadings?.packages?.description && (
                 <p>{c.sectionHeadings.packages.description}</p>
               )}
@@ -627,10 +627,12 @@ export default function App() {
                           <span className="pkg-card-price">{pkg.price}</span>
                           <span className="pkg-card-unit">{pkg.unit}</span>
                         </div>
+
                         <div className="pkg-card-tagline">{pkg.tagline}</div>
                       </div>
 
                       <div className="pkg-card-specs">
+                        <h3 className='pkg-card-title'>Highlights</h3>
                         {pkg.specs?.map((spec, specIdx) => (
                           <div key={specIdx} className="pkg-spec-category">
                             {spec.category && <h4 className="pkg-category-name">{spec.category}</h4>}
