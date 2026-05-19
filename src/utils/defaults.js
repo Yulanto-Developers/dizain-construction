@@ -5,16 +5,16 @@ export const DEFAULT_CONTENT = {
   contact: {
     phone: '+91 89393 30941',
     whatsapp: '918939330941',
-    whatsappEnabled: true,
+    whatsappEnabled: false,
     email: 'dizainconstruction@gmail.com',
-    address: 'Chennai, Tamil Nadu',
+    address: '8, 6th St, LIC Colony, Anakaputhur, Chennai, Tamil Nadu 600075',
     logoUrl: '/Logo.jpg',
   },
 
   hero: {
     badge: 'Trusted in Chennai since 2012',
     heading1: 'Build Your Dream Home',
-    heading2: 'With Total Clarity',
+    heading2: 'With Dizain Construction',
     summary:
       'End-to-end construction — from design and approvals to final handover. Fixed pricing, milestone payments, and a 10-year structural warranty on every project.',
     trustPills: [
@@ -45,7 +45,7 @@ export const DEFAULT_CONTENT = {
 
   services: [
     { icon: '🏠', title: 'Turnkey Home Construction', copy: 'We manage everything — design, approvals, material procurement, civil work, and final handover. One team, zero coordination headaches.', tag: 'Most Popular' },
-    { icon: '🏛️', title: 'Interior Design', copy: 'Architect-led planning for statement homes with high-end detailing, premium finishes, and dedicated site supervision from day one.', tag: '' },
+    { icon: '🏛️', title: 'Interior Design', copy: 'Interior spaces thoughtfully designed with premium finishes, smart space planning, custom detailing, and elegant aesthetics tailored to elevate everyday living.', tag: '' },
     { icon: '🏢', title: 'Commercial Construction', copy: 'Office spaces, retail stores, and mixed-use buildings built with operational efficiency, code compliance, and a sharp eye on timelines.', tag: '' },
     { icon: '🔨', title: 'Renovation & Upgrades', copy: 'Floor additions, interior renovation, structural upgrades, and modern remodelling — executed without disrupting your daily life.', tag: '' },
     { icon: '📐', title: 'Architectural Design', copy: 'In-house architects create functional floor plans, 3D visualisations, and working drawings that reflect your lifestyle and budget.', tag: '' },

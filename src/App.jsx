@@ -817,7 +817,7 @@ export default function App() {
       </button>
 
       {/* ─── WhatsApp Floating Button ───────── */}
-      {/* {
+      {
         !showModal && c.contact?.whatsapp && (c.contact?.whatsappEnabled ?? true) && (
           <a
             href={`https://wa.me/${c.contact.whatsapp}?text=Hi%2C+I+want+to+discuss+a+construction+project+with+Dizain+Constructions.`}
@@ -865,7 +865,7 @@ export default function App() {
             }}>Chat on WhatsApp</span>
           </a>
         )
-      } */}
+      }
 
       {/* ─── Modal ──────────────────────────── */}
       {
