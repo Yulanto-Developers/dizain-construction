@@ -54,8 +54,8 @@ export const DEFAULT_CONTENT = {
 
   gallery: [
     {
-      id: 'gallery-10',
-      src: '/gallery/project-10.jpg',
+      id: 'gallery-11',
+      src: '/gallery/project-11.jpg',
       alt: 'Project Photo 1',
       type: 'Project',
       title: 'Completed Project 1',
@@ -63,8 +63,8 @@ export const DEFAULT_CONTENT = {
       featured: true,
     },
     {
-      id: 'gallery-11',
-      src: '/gallery/project-11.jpg',
+      id: 'gallery-12',
+      src: '/gallery/project-12.jpg',
       alt: 'Project Photo 2',
       type: 'Project',
       title: 'Completed Project 2',
@@ -95,6 +95,15 @@ export const DEFAULT_CONTENT = {
       alt: 'Project Photo 5',
       type: 'Project',
       title: 'Completed Project 5',
+      desc: '',
+      featured: false,
+    },
+    {
+      id: 'gallery-6',
+      src: '/gallery/project-1.6.jpg',
+      alt: 'Project Photo 6',
+      type: 'Project',
+      title: 'Completed Project 6',
       desc: '',
       featured: false,
     },
