@@ -72,15 +72,6 @@ export const DEFAULT_CONTENT = {
       featured: false,
     },
     {
-      id: 'gallery-12',
-      src: '/gallery/project-12.jpg',
-      alt: 'Project Photo 3',
-      type: 'Project',
-      title: 'Completed Project 3',
-      desc: '',
-      featured: false,
-    },
-    {
       id: 'gallery-3',
       src: '/gallery/project-3.jpg',
       alt: 'Project Photo 4',
